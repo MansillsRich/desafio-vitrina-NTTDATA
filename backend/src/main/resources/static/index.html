@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vitrina de Productos</title>
+    <!-- Enlace al nuevo archivo CSS -->
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+    <header>
+        <h1>Vitrina de Productos</h1>
+        <div class="controls">
+            <input type="text" id="search-input" placeholder="Buscar por nombre..." />
+            <select id="category-filter">
+                <option value="">Todas las categorías</option>
+            </select>
+            <select id="format-filter">
+                <option value="">Todos los formatos</option>
+            </select>
+        </div>
+    </header>
+
+    <main class="grid" id="product-grid">
+        <div class="status-msg">Cargando productos...</div>
+    </main>
+
+    <div class="pagination">
+        <button id="prev-btn" disabled>&laquo; Anterior</button>
+        <span id="page-info">Página 1</span>
+        <button id="next-btn" disabled>Siguiente &raquo;</button>
+    </div>
+
+    <script src="/app.js"></script>
+</body>
+</html>

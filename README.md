@@ -88,7 +88,7 @@ Spring Boot (Puerto 8080)
      mvnw.cmd spring-boot:run
      ```
 
-3. Abre el navegador en:
+3. Abrir el navegador en:
    * **Interfaz Web**: http://localhost:8080
    * **Consola H2 (Base de datos)**: http://localhost:8080/h2-console (JDBC URL: `jdbc:h2:mem:catalogdb`, sin contraseña).
 

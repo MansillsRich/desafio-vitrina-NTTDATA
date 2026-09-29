@@ -1,5 +1,6 @@
 const API_URL = 'http://localhost:8080/api/products';
 const FILTERS_URL = 'http://localhost:8080/api/products/filters';
+const PLACEHOLDER_IMG = "data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F200%2Fsvg%22%20width%3D%22200%22%20height%3D%22200%22%20viewBox%3D%220%200%20200%20200%22%3E%3Crect%20fill%3D%22%23f1f5f9%22%20width%3D%22200%22%20height%3D%22200%22%2F%3E%3Ctext%20fill%3D%22%2394a3b8%22%20font-family%3D%22sans-serif%22%20font-size%3D%2214%22%20font-weight%3D%22bold%22%20x%3D%2250%25%22%20y%3D%2250%25%22%20dominant-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%3ESin%20Imagen%3C%2Ftext%3E%3C%2Fsvg%3E";
 
 let currentPage = 0;
 let totalPages = 1;
@@ -82,15 +83,18 @@ function renderProducts(products) {
         return;
     }
 
-    gridContainer.innerHTML = products.map(product => `
+    gridContainer.innerHTML = products.map(product => {
+        const imgSrc = (product.image && product.image.trim() !== '') ? product.image : PLACEHOLDER_IMG;
+        return `
         <div class="card">
-            <img src="${product.image || 'https://via.placeholder.com/200?text=Sin+Imagen'}" alt="${product.name}" onerror="this.src='https://via.placeholder.com/200?text=Sin+Imagen'" />
+            <img src="${imgSrc}" alt="${product.name}" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src='${PLACEHOLDER_IMG}';" />
             <div class="card-category">${product.category || 'General'}</div>
             <h3 class="card-title">${product.name}</h3>
             <div class="card-price">$${product.price ? product.price.toLocaleString('es-CL') : '0'}</div>
             ${product.format ? `<div class="card-format">Formato: ${product.format}</div>` : ''}
         </div>
-    `).join('');
+        `;
+    }).join('');
 }
 
 // Actualizar controles de paginación

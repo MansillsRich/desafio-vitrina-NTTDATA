@@ -10,6 +10,9 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 public class DataLoader implements CommandLineRunner {
 
@@ -31,6 +34,7 @@ public class DataLoader implements CommandLineRunner {
             String line;
             boolean isFirstLine = true;
             String header = null;
+            List<Product> products = new ArrayList<>();
 
             while ((line = reader.readLine()) != null) {
                 if (isFirstLine) {
@@ -60,13 +64,14 @@ public class DataLoader implements CommandLineRunner {
                         product.setPrice(0.0);
                     }
 
-                    if (columns.length > 6) {
-                        product.setImage(cleanString(columns[6]));
+                    if (columns.length > 9) {
+                        product.setImage(cleanString(columns[9]));
                     }
 
-                    productRepository.save(product);
+                    products.add(product);
                 }
             }
+            productRepository.saveAll(products);
             System.out.println("✅ Catálogo CSV cargado con éxito. Total registros: " + productRepository.count());
         } catch (Exception e) {
             System.err.println("❌ Error al cargar catalog.csv: " + e.getMessage());

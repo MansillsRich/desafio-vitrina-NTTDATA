@@ -9,14 +9,18 @@ public class Product {
     
     @Id
     private String id;
+
+    @Column(length = 500)
     private String name;
     
-    @Column(length = 1000)
+    @Column(columnDefinition = "TEXT")
     private String description;
     
     private String format;
     private String category;
     private Double price;
+
+    @Column(length = 1000)
     private String image;
 
     // Constructores

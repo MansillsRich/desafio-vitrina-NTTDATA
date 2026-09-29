@@ -26,6 +26,7 @@ public class ProductController {
     @GetMapping
     public ResponseEntity<Page<Product>> getProducts(
             @RequestParam(required = false) String q,
+            @RequestParam(required = false) String search,
             @RequestParam(required = false) String category,
             @RequestParam(required = false) String format,
             @RequestParam(defaultValue = "0") int page,
@@ -33,7 +34,8 @@ public class ProductController {
 
         Pageable pageable = PageRequest.of(page, size);
         
-        String searchQ = (q != null && !q.trim().isEmpty()) ? q.trim() : null;
+        String term = (search != null && !search.trim().isEmpty()) ? search : q;
+        String searchQ = (term != null && !term.trim().isEmpty()) ? term.trim() : null;
         String searchCategory = (category != null && !category.trim().isEmpty()) ? category.trim() : null;
         String searchFormat = (format != null && !format.trim().isEmpty()) ? format.trim() : null;
 
